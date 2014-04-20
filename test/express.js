@@ -2,6 +2,7 @@
 module.exports = function(authOptions) {
   var express = require('express');
   var app = express();
+  var bodyParser = require('body-parser');
   var auth = require('../index');
   
   var userIDName = 'userID';
@@ -12,11 +13,8 @@ module.exports = function(authOptions) {
     tokenName = authOptions.tokenName || 'token';
   }
 
-  app.use(express.urlencoded());
-  app.use(express.json());
+  app.use(bodyParser());
   app.use(auth(authOptions));
-  app.use(express.errorHandler('production'));
-  app.use(app.router);
 
 
   var password = '567890';
