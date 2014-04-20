@@ -1,0 +1,16 @@
+{
+  "name": "express-restful-auth",
+  "version": "0.1.0",
+  "private": false,
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./test/auth.js"
+  },
+  "dependencies": {
+    "uid2": "*",
+    "express": "3.4.4",
+    "supertest": "*",
+    "express-session": "*",
+    "connect-redis": "*",
+    "mocha": "*"
+  }
+}
