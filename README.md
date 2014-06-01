@@ -7,7 +7,7 @@ the right place. express-restful-auth is an light-weight RESTful authentication
 system based on userID and access token. It will only generation session 
 information and store it into redis when you explicitly calls for 
 
-    req.genSession(req). 
+    req.genSession(). 
 
 When either of userID or access token is provided, the system will enforce both
 to be present and check if the userID matches with the token. 
@@ -34,8 +34,8 @@ can do the following:
 
     app.get('/login', function(req, res) {
       if (req.param('password') === password && req.param('username') === username) {
-        req.genSession(req);
-        // or, if you are more comfortable, req = req.genSession(req);
+        req.genSession();
+        // or, if you are more comfortable, req = req.genSession();
 
         // now I will associate this userID with the session. String format is 
         // preferred because express sometimes typecast unexpectedly. Note: you

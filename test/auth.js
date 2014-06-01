@@ -30,6 +30,52 @@ describe('try to break into the system', function() {
     });
   });
 
+  it('should be able to log out if userID matches with token', function(done) {
+    var app = express();
+    request(app)
+    .get('/login')
+    .send({username: username, password: password})
+    .expect(200)
+    .end(function(e, res) {
+      
+      // now we have the token, lets see if it works with /user 
+      var token = res.body.token;
+      request(app)
+      .get('/logout')
+      .query({userID: userID, token: token})
+      .expect(200)
+      .end(function(err, res){
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+    });
+  });
+
+  it('should not be able to log out if wrong token', function(done) {
+    var app = express();
+    request(app)
+    .get('/login')
+    .send({username: username, password: password})
+    .expect(200)
+    .end(function(e, res) {
+      
+      // now we have the token, lets see if it works with /user 
+      var token = res.body.token + 'wrong';
+      request(app)
+      .get('/logout')
+      .query({userID: userID, token: token})
+      .expect(401)
+      .end(function(err, res){
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+    });
+  });
+
   it('request should be rejected with 401 if the token is bad', function(done) {
     var app = express();
     request(app)
@@ -54,7 +100,7 @@ describe('try to break into the system', function() {
     });
   });
 
-  it('should work under post', function(done) {
+  it('should work for post', function(done) {
     var app = express();
     request(app)
     .get('/login')
@@ -79,6 +125,7 @@ describe('try to break into the system', function() {
     });
   });
 });
+
 describe('test effect of different settings', function() {
   it("use a different userID name, should not work with 'id'", function(done) {
     assert.throws(

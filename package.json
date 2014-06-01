@@ -1,9 +1,9 @@
 {
   "name": "express-restful-auth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test/auth.js"
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha ./test/auth.js"
   },
   "repository" :
   {
